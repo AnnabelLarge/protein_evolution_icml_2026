@@ -1,0 +1,80 @@
+{
+    "training_wkdir": "RESULTS_lstm-s2s_data3_seed903",
+    "rng_seednum": 903,
+
+    "data_dir": "DATA_cherries",
+    "train_dset_splits": ["FAMCLAN-CHERRIES_split1",
+                         "FAMCLAN-CHERRIES_split2",
+                         "FAMCLAN-CHERRIES_split4",
+                         "FAMCLAN-CHERRIES_split6",
+                         "FAMCLAN-CHERRIES_split7",
+                         "FAMCLAN-CHERRIES_split8",
+                         "FAMCLAN-CHERRIES_split9"],
+
+    "dev_dset_splits": ["FAMCLAN-CHERRIES_split0"],
+
+    "test_dset_splits": ["FAMCLAN-CHERRIES_split3",
+                          "FAMCLAN-CHERRIES_split5"],
+
+    "toss_alignments_longer_than": 513,
+    "batch_size": 128,
+    "chunk_length": 512,
+
+    "num_epochs": 30,
+    "optimizer_config": {
+        "init_value": 1e-4,
+        "peak_value": 1e-4,
+        "end_value": 1e-4,
+        "warmup_steps": 0,
+        "weight_decay": 1e-4,
+        "every_k_schedule": 1
+    },
+    "early_stop_cond1_atol": 1e-3,
+    "early_stop_cond2_gap": 0.5,
+    "patience": 5,
+    "update_grads": true,
+    "use_scan_fns": false,
+
+    "interms_for_tboard": {
+        "sow_outputs": false,
+        "embeddings": false,
+        "gradients": false,
+        "weights": false,
+        "optimizer": false,
+        "forward_pass_outputs": false,
+        "attn_weights": false
+    },
+    "save_arrs": false,
+    "save_per_sample_losses": false,
+    "record_metrics_every_n_steps": 500,
+    "checkpoint_every_t_seconds": 1800,
+
+    "anc_model_type": "lstm",
+    "anc_enc_config": {"initial_embed_module": "EmbeddingWithPadding",
+                       "first_block_module": "BidirecLSTMLayer",
+                       "subsequent_block_module": "BidirecLSTMLayer",
+                       "n_layers": 1,
+                       "hidden_dim": 1028,
+                       "dropout": 0.00},
+
+    "desc_model_type": "lstm",
+    "desc_dec_config": {"initial_embed_module": "EmbeddingWithPadding",
+                       "first_block_module": "UnidirecLSTMLayer",
+                       "subsequent_block_module": "UnidirecLSTMLayer",
+                       "n_layers": 1,
+                       "hidden_dim": 1028,
+                       "dropout": 0.00},
+
+    "pred_model_type": "feedforward",
+    "pred_config": {
+        "postproc_model_type": "feedforward",
+        "use_bias": true,
+        "use_anc_emb": true,
+        "use_desc_emb": true,
+        "use_prev_align_info": true,
+        "layer_sizes": [500],
+        "dropout": 0.20,
+        "t_per_sample": true 
+    }
+    
+}

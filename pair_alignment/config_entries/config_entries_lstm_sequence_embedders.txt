@@ -1,0 +1,11 @@
+"anc_model_type": set to "lstm"
+"anc_enc_config": dictionary containing sub-config for the ancestor sequence embedder; contains the following-
+    "initial_embed_module": (STRING) How to first embed the sequences; "EmbeddingWithPadding" is good
+    "first_block_module": (STRING) What block to after first embedding the sequences; we use"BidirecLSTMLayer"
+    "subsequent_block_module": (STRING) What subsequence blocks to use; we use"BidirecLSTMLayer"
+    "n_layers": (INT) how many LSTM layers to use
+    "hidden_dim": (INT) embedding size
+    "dropout": (FLOAT) dropout rate, if using more than one LSTM layer
+
+"desc_model_type": set to "lstm"
+"desc_dec_config":  dictionary containing sub-config for the descendant sequence embedder; contains same values as anc_enc_config

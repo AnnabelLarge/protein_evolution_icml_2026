@@ -1,0 +1,111 @@
+{
+    "training_wkdir": "RESULTS_transf-TKF_6block_data1_seed9",
+    "rng_seednum": 9,
+
+    "data_dir": "DATA_cherries",
+    "train_dset_splits": ["FAMCLAN-CHERRIES_split0",
+                         "FAMCLAN-CHERRIES_split1",
+                         "FAMCLAN-CHERRIES_split2",
+                         "FAMCLAN-CHERRIES_split3",
+                         "FAMCLAN-CHERRIES_split4",
+                         "FAMCLAN-CHERRIES_split5",
+                         "FAMCLAN-CHERRIES_split6"],
+
+    "dev_dset_splits": ["FAMCLAN-CHERRIES_split7"],
+
+    "test_dset_splits": ["FAMCLAN-CHERRIES_split8",
+                          "FAMCLAN-CHERRIES_split9"],
+
+    "toss_alignments_longer_than": 513,
+    "batch_size": 50,
+    "chunk_length": 512,
+
+    "num_epochs": 30,
+    "optimizer_config": {
+        "init_value": 1e-4,
+        "peak_value": 1e-4,
+        "end_value": 1e-4,
+        "warmup_steps": 0,
+        "weight_decay": 1e-3,
+        "every_k_schedule": 1
+    },
+    "early_stop_cond1_atol": 1e-3,
+    "early_stop_cond2_gap": 0.1,
+    "patience": 5,
+    "update_grads": true,
+    "use_scan_fns": false,
+
+    "interms_for_tboard": {
+        "sow_outputs": false,
+        "embeddings": false,
+        "gradients": false,
+        "weights": false,
+        "optimizer": false,
+        "forward_pass_outputs": false,
+        "attn_weights": false
+    },
+    "save_arrs": false,
+    "save_per_sample_losses": false,
+    "record_metrics_every_n_steps": 500,
+    "checkpoint_every_t_seconds": 1800,
+
+    "anc_model_type": "transformer",
+    "anc_enc_config": {"initial_embed_module": "EmbeddingWithPadding",
+                       "first_block_module": "RoPETransfBlock",
+                       "subsequent_block_module": "RoPETransfBlock",
+                       "hidden_dim": 756,
+                       "num_blocks": 6,
+                       "num_heads": 6,
+                       "dropout": 0.2,
+                       "max_position_embeddings": 3000
+                       },
+
+    "desc_model_type": "transformer",
+    "desc_dec_config": {"initial_embed_module": "EmbeddingWithPadding",
+                       "first_block_module": "RoPETransfBlock",
+                       "subsequent_block_module":"RoPETransfBlock",
+                       "hidden_dim": 756,
+                       "num_blocks": 6,
+                       "num_heads": 6,
+                       "dropout": 0.2,
+                       "max_position_embeddings": 3000
+                       },
+
+    "pred_model_type": "neural_hmm",
+    "pred_config": {
+        "load_all": false,
+        "subst_model_type": "f81",
+        "indel_model_type": "tkf92",
+
+        "global_or_local": {"equl_dist": "local",
+                            "rate_mult": "local",
+                            "tkf_rates": "local",
+                            "tkf92_frag_size": "local"},
+
+        "emissions_postproc_model_type": "feedforward",
+        "emissions_postproc_config": {"use_anc_emb": true,
+                                      "use_desc_emb": true,
+                                      "use_prev_align_info": false,
+                                      "layer_sizes": [500],
+                                      "dropout": 0.20,
+                                      "normalize_seq_embeddings_before_block": true},
+
+        "transitions_postproc_model_type": "feedforward",
+        "transitions_postproc_config": {"use_anc_emb": true,
+                                        "use_desc_emb": true,
+                                        "use_prev_align_info": true,
+                                        "layer_sizes": [500],
+                                        "dropout": 0.20,
+                                        "normalize_seq_embeddings_before_block": true},
+                                        
+        "regularization_rates": {"equl_dist":0,
+                                 "rate_mult":0,
+                                 "tkf_lambda":0,
+                                 "tkf_mu":0,
+                                 "tkf92_frag_size":0},
+
+        "times_from": "t_per_sample"
+
+    }
+    
+}

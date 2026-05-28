@@ -1,0 +1,25 @@
+"pred_model_type": set to "neural_hmm"
+"pred_config": dictionary containing sub-config for neural TKF prediction head; contains the following-
+    "load_all": (BOOL) True if you're loading parameters, False if you're training for the first time
+    "subst_model_type": (STRING) only option is "f81"
+    "indel_model_type": (STRING) only option is "tkf92"
+
+    "global_or_local": sub-dictionary; all entries should be kept at "local"
+        "equl_dist": (STRING) keep at "local"
+        "rate_mult": (STRING) keep at "local"
+        "tkf_rates": (STRING) keep at "local"
+        "tkf92_frag_size": (STRING) keep at "local"
+
+    "emissions_postproc_model_type": (STR) which block to use to combine features; we use "feedforward"
+    "emissions_postproc_config": sub-sub-dictionary for postprocessing features for substitution model parameters; contains the following-
+        "use_anc_emb": (BOOL) use the ancestor sequence embedding; we use True
+        "use_desc_emb": (BOOL)  use the descendant sequence embedding; we use True
+        "use_prev_align_info": (BOOL) use the previous column's alignment state; we use FALSE for substitution model parameters, and TRUE for indel model parameterse
+        "layer_sizes": (LIST of ints) layer size of intermediate linear layers
+        "dropout": (FLOAT) dropout rate
+        "normalize_seq_embeddings_before_block": (BOOL) whether or not to layer normalize sequence embeddings upon input; we use True},
+
+    "transitions_postproc_model_type": (STR) which block to use to combine features; we use "feedforward"
+    "transitions_postproc_config": sub-sub-dictionary for postprocessing features for substitution model parameters; contains same entries as emissions_postproc_config
+
+    "times_from": keep at "t_per_sample" to use branch length from pfam

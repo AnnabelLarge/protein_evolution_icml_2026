@@ -1,0 +1,18 @@
+"pred_model_type": set to "pairhmm_indp_sites" for TKF91, TKF92, and mixture of sites; set to "pairhmm_frag_and_site_classes" for mixture of fragments and mixture of domains
+"pred_config": dictionary that contains the following-
+    "load_all": (BOOL) True if you're loading parameters, False if you're training for the first time
+    
+    "num_domain_mixtures": (INT) number of latent domain classes
+    "num_fragment_mixtures": (INT) number of latent fragment classes
+    "num_site_mixtures": (INT) number of latent site classes
+    "k_rate_mults": (INT) number of possible rate multipliers; we keep this at 4
+    
+    "subst_model_type": (STRING) substitution model name; we use "f81"
+    "norm_rate_matrix": (BOOL) normalize rate matrix Q? we use True
+    "norm_rate_mults": (BOOL) normalize all rate multipliers to average to one? We use True
+    "indp_rate_mults": (BOOL) have a set of rate multipliers for all mixtures? We use False (i.e. one set of rate multipliers per site class)
+    
+    "indel_model_type": (STR) indel model name; "tkf91" or "tkf92"
+    "tkf_function": (STR) how to calculate tkf parameters; we use "switch_tkf"
+
+    "times_from": keep at "t_per_sample" to use branch length from pfam

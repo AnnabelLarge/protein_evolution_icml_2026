@@ -1,0 +1,10 @@
+"pred_model_type": set to "feedforward"
+"pred_config": dictionary containing sub-config for Basic neural prediction head; contains the following-
+    "postproc_model_type": (STR) which block to use to combine features; we use "feedforward"
+    "use_bias": (BOOL) use bias in feedforward network?
+    "use_anc_emb": (BOOL) use the ancestor sequence embedding; we use True
+    "use_desc_emb": (BOOL)  use the descendant sequence embedding; we use True
+    "use_prev_align_info": (BOOL) use the previous column's alignment state; TRUE
+    "t_per_sample": (BOOL) whether or not to include time
+    "layer_sizes": (LIST of ints) layer size of intermediate linear layers
+    "dropout": (FLOAT) dropout rate

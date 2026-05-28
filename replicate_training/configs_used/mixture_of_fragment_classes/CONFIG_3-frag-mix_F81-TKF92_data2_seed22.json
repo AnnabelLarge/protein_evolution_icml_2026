@@ -1,0 +1,66 @@
+{
+    "training_wkdir": "RESULTS_3-frag-mix_F81-TKF92_data2_seed22",
+    "rng_seednum": 22,
+
+    "data_dir": "DATA_cherries",
+    "train_dset_splits": ["FAMCLAN-CHERRIES_split1",
+                         "FAMCLAN-CHERRIES_split3",
+                         "FAMCLAN-CHERRIES_split4",
+                         "FAMCLAN-CHERRIES_split5",
+                         "FAMCLAN-CHERRIES_split7",
+                         "FAMCLAN-CHERRIES_split8",
+                         "FAMCLAN-CHERRIES_split9"],
+
+    "dev_dset_splits": ["FAMCLAN-CHERRIES_split6"],
+
+    "test_dset_splits": ["FAMCLAN-CHERRIES_split0",
+                          "FAMCLAN-CHERRIES_split2"],
+
+    "toss_alignments_longer_than": 513,
+    "chunk_length": 512,
+    "batch_size": 2500,
+    
+    "num_epochs": 150,
+    "optimizer_config": {
+        "init_value": 0.005,
+        "peak_value": 0.005,
+        "end_value": 0.005,
+        "warmup_steps": 0,
+        "weight_decay": 0,
+        "every_k_schedule": 1
+    },
+    "early_stop_cond1_atol": 1e-3,
+    "early_stop_cond2_gap": 3,
+    "patience": 5,
+    "update_grads": true,
+
+    "interms_for_tboard": {
+        "sow_outputs": false,
+        "forward_pass_outputs": false,
+        "gradients": false,
+        "optimizer": false
+    },
+    "save_arrs": false,
+    "save_per_sample_losses": false,
+    "record_metrics_every_n_steps": 500,
+    "checkpoint_every_t_seconds": 1800,
+
+    "pred_model_type": "pairhmm_frag_and_site_classes",
+    "pred_config": {
+        "load_all": false,
+        "num_domain_mixtures": 1,
+        "k_rate_mults": 4,
+        "num_fragment_mixtures": 3,
+        "num_site_mixtures": 3,
+        
+        "subst_model_type": "f81",
+        "indp_rate_mults": false,
+        "norm_rate_matrix": true,
+        "norm_rate_mults": true,
+        
+        "tkf_function": "switch_tkf",
+
+        "times_from": "t_per_sample"
+        }
+    
+}
